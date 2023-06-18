@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request
 import datetime
+<<<<<<< HEAD
 import csv
+=======
+>>>>>>> b0b574bab6676947b907ae22474e548cc0b728ec
 
 app = Flask(__name__)
 
@@ -14,8 +17,12 @@ class ParkingSlot:
 class ParkingLot:
     def __init__(self, num_slots):
         self.slots = [ParkingSlot(slot_id) for slot_id in range(1, num_slots + 1)]
+<<<<<<< HEAD
         self.booking_details_file = 'booking_details.csv'
     
+=======
+
+>>>>>>> b0b574bab6676947b907ae22474e548cc0b728ec
     def display_available_slots(self):
         return [slot.slot_id for slot in self.slots if slot.available]
 
@@ -32,10 +39,13 @@ class ParkingLot:
                     'Entry Time': entry_time,
                     'Exit Time': exit_time
                 }
+<<<<<<< HEAD
                 with open(self.booking_details_file, 'a', newline='') as csvfile:
                     writer = csv.writer(csvfile)
                     writer.writerow([booking_id, slot_id, name, vehicle_number, date, entry_time, exit_time])
 
+=======
+>>>>>>> b0b574bab6676947b907ae22474e548cc0b728ec
                 return True
             else:
                 return False
@@ -48,6 +58,7 @@ class ParkingLot:
             slot.available = True
             slot.booking_id = None
             slot.booking_details = {}
+<<<<<<< HEAD
             with open(self.booking_details_file, 'r', newline='') as csvfile:
                 reader = csv.reader(csvfile)
                 rows = list(reader)
@@ -59,6 +70,8 @@ class ParkingLot:
                         writer.writerow(row)
 
         
+=======
+>>>>>>> b0b574bab6676947b907ae22474e548cc0b728ec
             return True
         else:
             return False
@@ -75,6 +88,7 @@ class ParkingLot:
                 return slot
         return None
 
+<<<<<<< HEAD
 
 def view_booked_slots():
     booking_details = []
@@ -95,6 +109,8 @@ def view_booked_slots():
         
     return booking_details
 
+=======
+>>>>>>> b0b574bab6676947b907ae22474e548cc0b728ec
 parking_lot = ParkingLot(10)
 
 @app.route('/')
@@ -137,6 +153,7 @@ def cancel():
     else:
         return render_template('cancel.html', booking_id=None, cancellation_message=None, error_message=None)
 
+<<<<<<< HEAD
 @app.route('/slot', methods=['GET', 'POST'])
 def slot():
     if request.method == 'POST':
@@ -149,6 +166,8 @@ def slot():
             return render_template('error.html')
     return render_template('slotlist.html')
 
+=======
+>>>>>>> b0b574bab6676947b907ae22474e548cc0b728ec
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
 
