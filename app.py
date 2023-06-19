@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import datetime
+import csv
 
 app = Flask(__name__)
 
@@ -13,7 +14,8 @@ class ParkingSlot:
 class ParkingLot:
     def __init__(self, num_slots):
         self.slots = [ParkingSlot(slot_id) for slot_id in range(1, num_slots + 1)]
-
+        self.booking_details_file = 'booking_details.csv'
+    
     def display_available_slots(self):
         return [slot.slot_id for slot in self.slots if slot.available]
 
@@ -30,6 +32,10 @@ class ParkingLot:
                     'Entry Time': entry_time,
                     'Exit Time': exit_time
                 }
+                with open(self.booking_details_file, 'a', newline='') as csvfile:
+                    writer = csv.writer(csvfile)
+                    writer.writerow([booking_id, slot_id, name, vehicle_number, date, entry_time, exit_time])
+
                 return True
             else:
                 return False
@@ -42,6 +48,17 @@ class ParkingLot:
             slot.available = True
             slot.booking_id = None
             slot.booking_details = {}
+            with open(self.booking_details_file, 'r', newline='') as csvfile:
+                reader = csv.reader(csvfile)
+                rows = list(reader)
+
+            with open(self.booking_details_file, 'w', newline='') as csvfile:
+                writer = csv.writer(csvfile)
+                for row in rows:
+                    if row[0] != booking_id:
+                        writer.writerow(row)
+
+        
             return True
         else:
             return False
@@ -57,6 +74,26 @@ class ParkingLot:
             if slot.booking_id == booking_id:
                 return slot
         return None
+
+
+def view_booked_slots():
+    booking_details = []
+    
+    with open('booking_details.csv', 'r', newline='') as csvfile:
+        reader = csv.reader(csvfile)
+            
+        for row in reader:
+            booking_id, slot_id, name, vehicle_number, date, entry_time, exit_time = row
+            booking_details.append({
+                'BookingID': booking_id,
+                'Name': name,
+                'VehicleNumber': vehicle_number,
+                'Date': date,
+                'EntryTime': entry_time,
+                'ExitTime': exit_time
+            })
+        
+    return booking_details
 
 parking_lot = ParkingLot(10)
 
@@ -99,6 +136,18 @@ def cancel():
             return render_template('cancel.html', booking_id=None, cancellation_message=None, error_message="Invalid booking ID")
     else:
         return render_template('cancel.html', booking_id=None, cancellation_message=None, error_message=None)
+
+@app.route('/slot', methods=['GET', 'POST'])
+def slot():
+    if request.method == 'POST':
+        key = "@dminonly@cce$$"
+        password = request.form['admin_pass']
+        if password == key:
+            booking_details = view_booked_slots()
+            return render_template('slots.html', booking_details=booking_details)
+        else:
+            return render_template('error.html')
+    return render_template('slotlist.html')
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

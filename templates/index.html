@@ -2,55 +2,34 @@
 <html>
 <head>
     <title>Parking Slot Pre-Booking</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 0;
-        }
+    <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='index.css') }} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
 
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
-        p {
-            text-align: center;
-            color: #555;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            text-align: center;
-        }
-
-        li {
-            display: inline-block;
-            margin-right: 10px;
-        }
-
-        a {
-            text-decoration: none;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border-radius: 4px;
-        }
-
-        a:hover {
-            background-color: #0056b3;
-        }
-    </style>
 </head>
 <body>
-    <h1>Welcome to the Parking Slot Pre-Booking System</h1>
-    <p>Choose an option:</p>
-    <ul>
-        <li><a href="/book">Book a Slot</a></li>
-        <li><a href="/cancel">Cancel Booking</a></li>
-    </ul>
+    <div class = "main-container">
+        <h2>Parking Slots pre-booking System</h2>
+        <p>Choose an option:</p>
+        <div class="button-row">
+            <form action="/book">
+                <input class="submit-btn-create" type="submit" value="Book a Slot" />
+            </form>
+        
+            <form action="/cancel">
+                <input class="submit-btn-create" type="submit" value="Cancel Booking" />
+            </form>
+        
+            <form action="/slot">
+                <input class="submit-btn-create" type="submit" value="View Booked Slots" />
+            </form>
+        </div>
+        
+       
+    </div>
 </body>
 </html>

@@ -2,7 +2,14 @@
 <html>
 <head>
     <title>Book a Slot</title>
-    <style>
+    <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='book.css') }} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <!-- <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f2f2f2;
@@ -58,39 +65,54 @@
         p.error {
             color: #ff0000;
         }
-    </style>
+    </style> -->
 </head>
 <body>
+    <div class="main-container">
     <div class="container">
-        <h1>Book a Slot</h1>
+        <center><h2>Book a Slot</h2></center><br>
         <form method="POST" action="/book">
-            <label for="slot_id">Select a Slot:</label>
-            <select name="slot_id" id="slot_id">
+
+            <select name="slot_id" id="slot_id" placeholder="Select a slot" style="width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; ">
+                <option value="" disabled selected>Select a slot</option>
                 {% for slot in available_slots %}
                     <option value="{{ slot }}">{{ slot }}</option>
                 {% endfor %}
             </select>
-            <br>
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" required>
-            <br>
-            <label for="vehicle_number">Vehicle Number:</label>
-            <input type="text" name="vehicle_number" id="vehicle_number" required>
-            <br>
-            <label for="date">Date:</label>
-            <input type="date" name="date" id="date" required>
-            <br>
-            <label for="entry_time">Entry Time:</label>
-            <input type="time" name="entry_time" id="entry_time" required>
-            <br>
-            <label for="exit_time">Exit Time:</label>
-            <input type="time" name="exit_time" id="exit_time" required>
-            <br>
-            <input type="submit" value="Book">
+            <br><br>
+            <input type="text" name="name" id="name" placeholder="Name" style="width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; padding:20 " required>
+            <br><br>
+            
+            <input type="text" name="vehicle_number" placeholder="Vehicle Number" id="vehicle_number" style="width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; " required>
+            <br><br>
+            <input type="date" name="date" id="date" style="width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" required>
+            <script>
+                const dateInput = document.getElementById('date');
+                const placeholderText = 'Date';
+
+                dateInput.addEventListener('focus', function() {
+                    dateInput.setAttribute('data-placeholder', placeholderText);
+                    dateInput.removeAttribute('placeholder');
+                });
+
+                dateInput.addEventListener('blur', function() {
+                    const currentPlaceholder = dateInput.getAttribute('data-placeholder');
+                    dateInput.setAttribute('placeholder', currentPlaceholder);
+                    dateInput.removeAttribute('data-placeholder');
+                });
+            </script>
+
+            <br><br>
+            <input type="time" name="entry_time" id="entry_time" placeholder="Entry Time" style="width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; " required>
+            <br><br>
+            <input type="time" name="exit_time" id="exit_time" placeholder="Exit Time" style="width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; " required>
+            <br><br>
+            <input class="submit-btn-create" type="submit" value="Book">
         </form>
         {% if error_message %}
             <p class="error">{{ error_message }}</p>
         {% endif %}
     </div>
+    </div>  
 </body>
 </html>
