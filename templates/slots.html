@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booked Slots</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <center><h1>Booked Slots</h1></center>
+    <table>
+        <thead>
+            <tr>
+                <th>Booking ID</th>
+                <th>Name</th>
+                <th>Vehicle Number</th>
+                <th>Date</th>
+                <th>Entry Time</th>
+                <th>Exit Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in booking_details %}
+            <tr>
+                <td>{{ booking['BookingID'] }}</td>
+                <td>{{ booking['Name'] }}</td>
+                <td>{{ booking['VehicleNumber'] }}</td>
+                <td>{{ booking['Date'] }}</td>
+                <td>{{ booking['EntryTime'] }}</td>
+                <td>{{ booking['ExitTime'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
