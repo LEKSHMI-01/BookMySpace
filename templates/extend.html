@@ -1,0 +1,20 @@
+<!-- extend.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Extend Booking</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Extend Booking</h1>
+    <form method="post" action="/extend">
+        <label for="booking_id">Booking ID:</label>
+        <input type="text" id="booking_id" name="booking_id" required><br>
+
+        <label for="exit_time">Exit Time:</label>
+        <input type="time" id="exit_time"20230624181414 name="exit_time" required><br>
+
+        <input class="submit-btn-create" type="submit" value="Extend Booking">
+    </form>
+</body>
+</html>

@@ -2,34 +2,33 @@
 <html>
 <head>
     <title>Parking Slot Pre-Booking</title>
-    <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='index.css') }} />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
 
 </head>
 <body>
-    <div class = "main-container">
-        <h2>Parking Slots pre-booking System</h2>
+    <div class="main-container">
+        <h2>Parking Slots Pre-booking System</h2>
         <p>Choose an option:</p>
         <div class="button-row">
             <form action="/book">
                 <input class="submit-btn-create" type="submit" value="Book a Slot" />
             </form>
-        
+
             <form action="/cancel">
                 <input class="submit-btn-create" type="submit" value="Cancel Booking" />
             </form>
-        
+
+            <form action="/extend"> <!-- Added form for Extend Booking -->
+                <input class="submit-btn-create" type="submit" value="Extend Booking" />
+            </form>
+
             <form action="/slot">
                 <input class="submit-btn-create" type="submit" value="View Booked Slots" />
             </form>
         </div>
-        
-       
     </div>
 </body>
 </html>
