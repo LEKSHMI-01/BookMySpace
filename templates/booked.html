@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Booking Successful</title>
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -111,6 +112,22 @@
     <div class="container">
         <h1>Booking Successful</h1>
         <p>Slot {{ slot_id }} has been booked with ID: {{ booking_id }}</p>
+        <a class="back-button" href="/home">Back to Home</a>
+        <style>
+            .back-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white; 
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+ 
+  .back-button:hover {
+    background-color: #45a049;
+  }
+        </style>
     </div>
 </body>
 </html>
