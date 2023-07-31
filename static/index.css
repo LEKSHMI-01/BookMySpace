@@ -30,11 +30,16 @@ p {
   transform: translate(-50%, -50%);
   border-radius: 25px;
   border: 2px solid #211d47;
-  width: 80%;
+  width: 600px;
   height: 45%;
   max-width: 500px;
   padding: 20px;
   background-color: #1b1740;
+  gap: 10px;
+}
+
+.button-row {
+  display: flex; /* Added to create a horizontal button arrangement */
   gap: 10px;
 }
 
@@ -46,7 +51,7 @@ p {
 }
 
 .submit-btn-create {
-  padding: 10px 30px; /* Updated padding for the left and right of the button */
+  padding: 10px 30px;
   border-radius: 5px;
   border: none;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -65,7 +70,7 @@ p {
 input[type="file"]::file-selector-button {
   background-color: #3b366f;
   color: white;
-  padding: 10px 30px; /* Updated padding for the left and right of the button */
+  padding: 10px 30px;
   border-radius: 5px;
   border: none;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -74,15 +79,5 @@ input[type="file"]::file-selector-button {
 
 input[type="file"]::file-selector-button:hover {
   border: none;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  background-color: #6761a3;
-  transform: scale(1.1);
-  transition: 0.2s ease;
-}
-
-.button-row {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
+  box-shadow: 0 0 5px;
 }

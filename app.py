@@ -1,8 +1,27 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, session
 import datetime
+import secrets
 import csv
 
+
 app = Flask(__name__)
+secret_key = secrets.token_hex(16)
+app.secret_key = secret_key
+
+
+users = []
+
+class User:
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
+
+def find_user(username):
+    for user in users:
+        if user.username == username:
+            return user
+    return None
+
 
 class ParkingSlot:
     def __init__(self, slot_id, available=True):
@@ -123,8 +142,57 @@ def view_booked_slots():
 parking_lot = ParkingLot(10)
 
 @app.route('/')
+def index():
+    session.clear()
+    return render_template('login.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        if find_user(username):
+            return render_template('register.html', error_message="Username already exists")
+
+        user = User(username, password)
+        users.append(user)
+
+        return redirect('/login')
+    else:
+        return render_template('register.html', error_message=None)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        user = find_user(username)
+        if user and user.password == password:
+            session['username'] = username  # Store the username in the session
+            return redirect('/home')
+        else:
+            return render_template('login.html', error_message="Invalid username or password")
+
+    return render_template('login.html', error_message=None)
+
+
+
+@app.route('/home')
 def home():
-    return render_template('index.html')
+    if 'username' in session:  # Check if the user is logged in
+        return render_template('index.html')
+    else:
+        return redirect('/')
+    
+@app.route('/logout')
+def logout():
+    session.clear()  # Clear the session
+    return redirect('/')
+
+
 
 @app.route('/book', methods=['GET', 'POST'])
 def book():
