@@ -42,10 +42,26 @@ class ParkingLot:
     def display_available_slots(self):
         return [slot.slot_id for slot in self.slots if slot.available]
 
+    def is_slot_available(self, slot_id, date, entry_time, exit_time):
+        # Convert date, entry_time, and exit_time to datetime objects
+        entry_datetime = datetime.datetime.strptime(f"{date} {entry_time}", "%Y-%m-%d %H:%M")
+        exit_datetime = datetime.datetime.strptime(f"{date} {exit_time}", "%Y-%m-%d %H:%M")
+
+        # Check if the slot is available for the entire duration
+        for slot in self.slots:
+            if slot.slot_id == slot_id and not slot.available:
+                if (entry_datetime >= slot.booking_details["Exit Time"] or
+                        exit_datetime <= slot.booking_details["Entry Time"]):
+                    continue
+                else:
+                    return False
+
+        return True
+
     def book_slot(self, slot_id, booking_id, name, vehicle_number, date, entry_time, exit_time):
         slot = self.get_slot_by_id(slot_id)
         if slot:
-            if slot.available:
+            if self.is_slot_available(slot_id, date, entry_time, exit_time):
                 slot.available = False
                 slot.booking_id = booking_id
                 slot.booking_details = {
@@ -64,6 +80,7 @@ class ParkingLot:
                 return False
         else:
             return False
+
 
     def cancel_booking(self, booking_id):
         slot = self.get_slot_by_booking_id(booking_id)
@@ -130,6 +147,7 @@ def view_booked_slots():
             booking_id, slot_id, name, vehicle_number, date, entry_time, exit_time = row
             booking_details.append({
                 'BookingID': booking_id,
+                'slot_id': slot_id,
                 'Name': name,
                 'VehicleNumber': vehicle_number,
                 'Date': date,

@@ -72,19 +72,6 @@
     <div class="container">
         <center><h2>Book a Slot</h2></center><br>
         <form method="POST" action="/book">
-
-            <select name="slot_id" id="slot_id" placeholder="Select a slot" style="width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; ">
-                <option value="" disabled selected>Select a slot</option>
-                {% for slot in available_slots %}
-                    <option value="{{ slot }}">{{ slot }}</option>
-                {% endfor %}
-            </select>
-            <br><br>
-            <input type="text" name="name" id="name" placeholder="Name" style="width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; padding:20 " required>
-            <br><br>
-            
-            <input type="text" name="vehicle_number" placeholder="Vehicle Number" id="vehicle_number" style="width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; " required>
-            <br><br>
             <input type="date" name="date" id="date" style="width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" required>
             <script>
                 const dateInput = document.getElementById('date');
@@ -107,6 +94,20 @@
             <br><br>
             <input type="time" name="exit_time" id="exit_time" placeholder="Exit Time" style="width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; " required>
             <br><br>
+
+            <select name="slot_id" id="slot_id" placeholder="Select a slot" style="width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; ">
+                <option value="" disabled selected>Select a slot</option>
+                {% for slot in available_slots %}
+                    <option value="{{ slot }}">{{ slot }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <input type="text" name="name" id="name" placeholder="Name" style="width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; padding:20 " required>
+            <br><br>
+            
+            <input type="text" name="vehicle_number" placeholder="Vehicle Number" id="vehicle_number" style="width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; " required>
+            <br><br>
+            
             <input class="submit-btn-create" type="submit" value="Book">
         </form>
         {% if error_message %}
