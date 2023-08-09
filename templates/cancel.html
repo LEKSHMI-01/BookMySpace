@@ -3,96 +3,109 @@
 <head>
     <title>Cancel Booking</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
+        * {
+            font-family: "Poppins", sans-serif;
             margin: 0;
             padding: 0;
         }
 
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
+        body {
+            background-color: #03001c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h2, p {
+            color: white;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 25px;
+            border: 2px solid #211d47;
+            width: 80%;
+            height: 85%;
+            max-width: 500px;
             padding: 20px;
-            text-align: center;
+            background-color: #1b1740;
+            gap: 10px;
         }
 
-        h1 {
-            color: #333;
-            margin-top: 0;
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            color: white;
+            gap: 10px;
         }
 
-        p {
-            margin-bottom: 20px;
-        }
-
-        form {
-            margin-top: 20px;
-            text-align: left;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-        }
-
-        input[type="text"],
-        input[type="submit"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-bottom: 10px;
-        }
-
-        input[type="submit"] {
-            background-color: #007bff;
+        .submit-btn-create {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            background-color: #3a9e3d;
             color: #fff;
+            width: 320px;
+        }
+
+        .submit-btn-create:hover {
+            background-color: #70ca73;
+            transform: scale(1.1);
+            transition: 0.2s ease;
+        }
+
+        input[type="file"]::file-selector-button {
+            background-color: #3b366f;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
             cursor: pointer;
         }
 
-        input[type="submit"]:hover {
-            background-color: #0056b3;
+        input[type="file"]::file-selector-button:hover {
+            border: none;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            background-color: #6761a3;
+            transform: scale(1.1);
+            transition: 0.2s ease;
         }
 
-        p.error {
-            color: #ff0000;
+        .button-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Cancel Booking</h1>
+    <div class="main-container">
+        <h2>Cancel Booking</h2>
         {% if cancellation_message %}
             <p>{{ cancellation_message }}</p>
         {% else %}
-            <form method="POST" action="/cancel">
+            <form method="POST" action="/cancel" class="form-field">
                 <label for="booking_id">Booking ID:</label>
                 <input type="text" name="booking_id" id="booking_id" required>
                 <br>
-                <input type="submit" value="Cancel">
+                <input type="submit" value="Cancel" class="submit-btn-create">
             </form>
             {% if error_message %}
                 <p class="error">{{ error_message }}</p>
             {% endif %}
         {% endif %}
         <a class="back-button" href="/home">Back to Home</a>
-        <style>
-            .back-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white; 
-    text-decoration: none;
-    border-radius: 5px;
-  }
-  
- 
-  .back-button:hover {
-    background-color: #45a049;
-  }
-        </style>
     </div>
 </body>
 </html>

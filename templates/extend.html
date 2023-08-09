@@ -1,12 +1,8 @@
-<!-- extend.html -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Extend Booking</title>
-    <!DOCTYPE html>
-
     <style>
-        /* Your new CSS styles go here */
         * {
             font-family: "Poppins", sans-serif;
             margin: 0;
@@ -20,11 +16,7 @@
             justify-content: center;
         }
 
-        h1 {
-            color: white;
-        }
-
-        p {
+        h2, p {
             color: white;
         }
 
@@ -39,16 +31,11 @@
             transform: translate(-50%, -50%);
             border-radius: 25px;
             border: 2px solid #211d47;
-            width: 600px;
-            height: 45%;
+            width: 80%;
+            height: 85%;
             max-width: 500px;
             padding: 20px;
             background-color: #1b1740;
-            gap: 10px;
-        }
-
-        .button-row {
-            display: flex; /* Added to create a horizontal button arrangement */
             gap: 10px;
         }
 
@@ -60,14 +47,14 @@
         }
 
         .submit-btn-create {
-            padding: 10px 30px;
+            padding: 10px 20px;
             border-radius: 5px;
             border: none;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
             cursor: pointer;
             background-color: #3a9e3d;
             color: #fff;
-            width: 150px;
+            width: 320px;
         }
 
         .submit-btn-create:hover {
@@ -79,7 +66,7 @@
         input[type="time"] {
             background-color: #3b366f;
             color: white;
-            padding: 10px 30px;
+            padding: 10px 20px;
             border-radius: 5px;
             border: none;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -88,23 +75,27 @@
 
         input[type="time"]:hover {
             border: none;
-            box-shadow: 0 0 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-row {
+            display: flex; /* Added to create a horizontal button arrangement */
+            gap: 10px;
         }
     </style>
-
-
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Extend Booking</h1>
-    <form method="post" action="/extend">
-        <label for="booking_id">Booking ID:</label>
-        <input type="text" id="booking_id" name="booking_id" required><br>
+    <div class="main-container">
+        <h2>Extend Booking</h2>
+        <form method="post" action="/extend" class="form-field">
+            <label for="booking_id">Booking ID:</label>
+            <input type="text" id="booking_id" name="booking_id" required><br>
+            
+            <label for="exit_time">Exit Time:</label>
+            <input type="time" id="exit_time" name="exit_time" required><br>
 
-        <label for="exit_time">Exit Time:</label>
-        <input type="time" id="exit_time"20230624181414 name="exit_time" required><br>
-
-        <input class="submit-btn-create" type="submit" value="Extend Booking">
-    </form>
+            <input class="submit-btn-create" type="submit" value="Extend Booking">
+        </form>
+    </div>
 </body>
 </html>
